@@ -1,14 +1,48 @@
 import React from "react";
-import { Routes } from "react-router-dom";
 import ParamEditor from "./SelSupEditor";
 
-const App = () => {
+function App() {
+  const params = [
+    {
+      id: 1,
+      name: "Назначение",
+      type: "string",
+    },
+    {
+      id: 2,
+      name: "Длина",
+      type: "string",
+    },
+  ];
+
+  const model = {
+    paramValues: [
+      {
+        paramId: 1,
+        value: "повседневное",
+      },
+      {
+        paramId: 2,
+        value: "макси",
+      },
+    ],
+    colors: [
+      {
+        id: 1,
+        name: "red",
+      },
+      {
+        id: 2,
+        name: "blue",
+      },
+    ],
+  };
+
   return (
-    <div>
-      <h1>My App</h1>
-      <ParamEditor />
+    <div className="App">
+      <ParamEditor params={params} model={model} />
     </div>
   );
-};
+}
 
 export default App;
