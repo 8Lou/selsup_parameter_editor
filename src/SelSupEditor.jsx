@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Param {
   id: number;
@@ -13,7 +13,7 @@ interface Color {
 
 interface ParamValue {
   paramId: number;
-  value: string;
+  value: string | undefined;
 }
 
 interface Model {
@@ -26,86 +26,69 @@ interface Props {
   model: Model;
 }
 
-interface State {
-  model: Model;
-  selectedColorId: number | null;
-}
+const ParamEditor = ({ params, model }: Props) => {
+  const [paramValues, setParamValues] = useState(model.paramValues);
+  const [selectedColorId, setSelectedColorId] = useState(null);
 
-class ParamEditor extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      model: props.model,
-      selectedColorId: null,
-    };
-  }
-
-  handleChange = (paramId: number, value: string) => {
-    const updatedParamValues = this.state.model.paramValues.map((paramValue) =>
+  const handleChange = (paramId, value) => {
+    const updatedParamValues = paramValues.map((paramValue) =>
       paramValue.paramId === paramId ? { ...paramValue, value } : paramValue
     );
-    this.setState({
-      model: { ...this.state.model, paramValues: updatedParamValues },
-    });
+    setParamValues(updatedParamValues);
   };
 
-  handleColorChange = (colorId: number) => {
-    this.setState({ selectedColorId: colorId });
+  const handleColorChange = (colorId) => {
+    setSelectedColorId(colorId);
   };
 
-  getModel = (): Model => {
-    return { ...this.state.model };
+  const getModel = () => {
+    return { ...model, paramValues };
   };
 
-  render() {
-    const { params, model } = this.props;
-    const { selectedColorId } = this.state;
-
-    return (
-      <div>
-        <h2>SelSup Editor</h2>
-        {params &&
-          params.map((param) => (
-            <div key={param.id}>
-              <label>{param.name}: </label>
-              <input
-                type="text"
-                value={
-                  model.paramValues.find((p) => p.paramId === param.id)
-                    ?.value || ""
-                }
-                onChange={(e) => this.handleChange(param.id, e.target.value)}
-              />
-            </div>
-          ))}
-        {model && model.colors && (
-          <div>
-            <h3>Выберите цвет:</h3>
-            {model.colors.map((color) => (
-              <button
-                key={color.id}
-                style={{
-                  backgroundColor: color.name,
-                  color: "white",
-                  padding: "5px",
-                  margin: "5px",
-                  cursor: "pointer",
-                }}
-                onClick={() => this.handleColorChange(color.id)}
-              >
-                {color.name}
-              </button>
-            ))}
-            <p>
-              Выбранный цвет:{" "}
-              {model.colors.find((c) => c.id === selectedColorId)?.name ||
-                "Не выбрано"}
-            </p>
+  return (
+    <div>
+      <h2>SelSup Editor</h2>
+      {params &&
+        params.map((param) => (
+          <div key={param.id}>
+            <label>{param.name}: </label>
+            <input
+              type="text"
+              value={
+                paramValues.find((p) => p.paramId === param.id)?.value || ""
+              }
+              onChange={(e) => handleChange(param.id, e.target.value)}
+            />
           </div>
-        )}
-      </div>
-    );
-  }
-}
+        ))}
+      {model && model.colors && (
+        <div>
+          <h3>Выберите цвет:</h3>
+          {model.colors.map((color) => (
+            <button
+              key={color.id}
+              style={{
+                backgroundColor: color.name,
+                color: "white",
+                padding: "5px",
+                margin: "5px",
+                cursor: "pointer",
+              }}
+              onClick={() => handleColorChange(color.id)}
+            >
+              {color.name}
+            </button>
+          ))}
+          <p>
+            Выбранный цвет:{" "}
+            {model.colors.find((c) => c.id === selectedColorId)?.name ||
+              "Не выбрано"}
+          </p>
+        </div>
+      )}
+      <button onClick={() => console.log(getModel())}>Получить модель</button>
+    </div>
+  );
+};
 
 export default ParamEditor;
