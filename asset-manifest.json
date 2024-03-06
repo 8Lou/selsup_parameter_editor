@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tz_catalog_application_kte_labs/static/css/main.e6c13ad2.css",
+    "main.js": "/tz_catalog_application_kte_labs/static/js/main.acf7cd58.js",
+    "index.html": "/tz_catalog_application_kte_labs/index.html",
+    "main.e6c13ad2.css.map": "/tz_catalog_application_kte_labs/static/css/main.e6c13ad2.css.map",
+    "main.acf7cd58.js.map": "/tz_catalog_application_kte_labs/static/js/main.acf7cd58.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.acf7cd58.js"
+  ]
+}
