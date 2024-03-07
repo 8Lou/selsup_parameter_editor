@@ -46,18 +46,34 @@ const ParamEditor = ({ params, model }: Props) => {
   };
 
   return (
-    <div>
-      <h2>SelSup Editor</h2>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "20px",
+        padding: "10px",
+        border: "1px solid #ccc",
+        borderRadius: "5px",
+        backgroundColor: "#f9f9f9",
+      }}
+    >
+      <h2 style={{ color: "blue" }}>SelSup Editor</h2>
       {params &&
         params.map((param) => (
-          <div key={param.id}>
-            <label>{param.name}: </label>
+          <div key={param.id} style={{ marginBottom: "10px" }}>
+            <label style={{ marginBottom: "5px" }}>{param.name}: </label>
             <input
               type="text"
               value={
                 paramValues.find((p) => p.paramId === param.id)?.value || ""
               }
               onChange={(e) => handleChange(param.id, e.target.value)}
+              style={{
+                padding: "5px",
+                borderRadius: "3px",
+                border: "1px solid #ccc",
+              }}
             />
           </div>
         ))}
