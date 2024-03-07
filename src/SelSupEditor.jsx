@@ -61,8 +61,17 @@ const ParamEditor = ({ params, model }: Props) => {
       <h2 style={{ color: "blue" }}>SelSup Editor</h2>
       {params &&
         params.map((param) => (
-          <div key={param.id} style={{ marginBottom: "10px" }}>
-            <label style={{ marginBottom: "5px" }}>{param.name}: </label>
+          <div
+            key={param.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "10px",
+            }}
+          >
+            <label style={{ fontWeight: "bold", width: "100px" }}>
+              {param.name}:{" "}
+            </label>
             <input
               type="text"
               value={
@@ -78,19 +87,39 @@ const ParamEditor = ({ params, model }: Props) => {
           </div>
         ))}
       {model && model.colors && (
-        <div>
-          <h3>Выберите цвет:</h3>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "15px",
+            margin: "15px",
+          }}
+        >
+          <h3 style={{ color: "blue" }}>Выберите цвет:</h3>
           {model.colors.map((color) => (
             <button
               key={color.id}
               style={{
                 backgroundColor: color.name,
                 color: "white",
-                padding: "5px",
+                padding: "15px",
                 margin: "5px",
                 cursor: "pointer",
+                borderRadius: "10px",
+                border: "none",
+                boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+                transform: "translateY(0)",
+                transition: "transform 0.3s",
               }}
               onClick={() => handleColorChange(color.id)}
+              onMouseDown={(e) => {
+                e.target.style.transform = "translateY(1px)";
+                e.target.style.boxShadow = "1px 1px 2px rgba(0, 0, 0, 0.3)";
+              }}
+              onMouseUp={(e) => {
+                e.target.style.transform = "translateY(0)";
+                e.target.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
+              }}
             >
               {color.name}
             </button>
@@ -102,7 +131,23 @@ const ParamEditor = ({ params, model }: Props) => {
           </p>
         </div>
       )}
-      <button onClick={() => console.log(getModel())}>Получить модель</button>
+      <button
+        style={{
+          backgroundColor: "blue",
+          color: "white",
+          padding: "15px",
+          marginTop: "10px",
+          cursor: "pointer",
+          borderRadius: "10px",
+          border: "none",
+          boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+          transform: "translateY(0)",
+          transition: "transform 0.3s",
+        }}
+        onClick={() => console.log(getModel())}
+      >
+        Получить модель
+      </button>
     </div>
   );
 };
