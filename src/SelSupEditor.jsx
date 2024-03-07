@@ -80,7 +80,6 @@ const ParamEditor = ({ params, model }: Props) => {
               onChange={(e) => handleChange(param.id, e.target.value)}
               style={{
                 padding: "5px",
-                margin: "5px",
                 borderRadius: "5px",
                 border: "1px solid #ccc",
               }}
@@ -88,7 +87,7 @@ const ParamEditor = ({ params, model }: Props) => {
           </div>
         ))}
       {model && model.colors && (
-        <div style={{ userSelect: "none" }}>
+        <div style={{ width: "200px" }}>
           <h4>Выберите цвет:</h4>
           {model.colors.map((color) => (
             <button
