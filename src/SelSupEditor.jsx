@@ -52,7 +52,7 @@ const ParamEditor = ({ params, model }: Props) => {
         flexDirection: "column",
         alignItems: "center",
         margin: "20px",
-        padding: "10px",
+        padding: "30px",
         border: "1px solid #ccc",
         borderRadius: "5px",
         backgroundColor: "#f9f9f9",
@@ -80,32 +80,26 @@ const ParamEditor = ({ params, model }: Props) => {
               onChange={(e) => handleChange(param.id, e.target.value)}
               style={{
                 padding: "5px",
-                borderRadius: "3px",
+                margin: "5px",
+                borderRadius: "5px",
                 border: "1px solid #ccc",
               }}
             />
           </div>
         ))}
       {model && model.colors && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "15px",
-            margin: "15px",
-          }}
-        >
-          <h3 style={{ color: "blue" }}>Выберите цвет:</h3>
+        <div style={{ userSelect: "none" }}>
+          <h4>Выберите цвет:</h4>
           {model.colors.map((color) => (
             <button
               key={color.id}
               style={{
                 backgroundColor: color.name,
                 color: "white",
-                padding: "15px",
-                margin: "5px",
+                padding: "10px",
+                margin: "10px",
                 cursor: "pointer",
-                borderRadius: "10px",
+                borderRadius: "5px",
                 border: "none",
                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
                 transform: "translateY(0)",
@@ -138,7 +132,7 @@ const ParamEditor = ({ params, model }: Props) => {
           padding: "15px",
           marginTop: "10px",
           cursor: "pointer",
-          borderRadius: "10px",
+          borderRadius: "5px",
           border: "none",
           boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
           transform: "translateY(0)",
